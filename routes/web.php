@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logincheck', 'UserSessionController@loginCheck')->middleware('disablecors');
 
 Route::post('/pstats', 'ExtensionController@postTabStats')->middleware('disablecors');
+
 //CORS disabled until here
+Route::get('/cardstats','StatsController@getCardStats');
+
 // Route::get('/checkme', 'UserSessionController@loginCheck')->middleware('disablecors');
 

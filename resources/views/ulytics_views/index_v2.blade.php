@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>Dashboard v2 | Ulytics</title>
+	<title>Ulytics|Dashboard</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -230,14 +230,17 @@
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-gradient-teal">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+						<!-- <div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div> -->
 						<div class="stats-content">
-							<div class="stats-title">NO OF WEBSITES VISITED TODAY</div>
-							<div class="stats-number">7,842,900</div>
+							<div class="stats-title">@{{data_card['total_urls_during_day']['label']}}</div>
+							<div class="stats-number">@{{data_card['total_urls_during_day']['value']}}</div>
 							<div class="stats-progress progress">
 								<div class="progress-bar" style="width: 70.1%;"></div>
 							</div>
 							<div class="stats-desc">Better than last week (70.1%)</div>
+							<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -245,14 +248,17 @@
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-gradient-blue">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+						<!-- <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div> -->
 						<div class="stats-content">
-							<div class="stats-title">TOTAL TIME SPENT ONLINE</div>
-							<div class="stats-number">180,200</div>
+							<div class="stats-title">@{{data_card['total_time_during_day']['label']}}</div>
+							<div class="stats-number">@{{data_card['total_time_during_day']['value']}} @{{data_card['total_time_during_day']['unit']}}</div>
 							<div class="stats-progress progress">
 								<div class="progress-bar" style="width: 40.5%;"></div>
 							</div>
 							<div class="stats-desc">Better than last week (40.5%)</div>
+							<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -260,14 +266,17 @@
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-gradient-purple">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+						<!-- <div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div> -->
 						<div class="stats-content">
-							<div class="stats-title">TIME SPENT ON PRODUCTIVE</div>
-							<div class="stats-number">38,900</div>
+							<div class="stats-title">@{{data_card['no_of_new_websites_visited_today']['label']}}</div>
+							<div class="stats-number">@{{data_card['no_of_new_websites_visited_today']['value']}}</div>
 							<div class="stats-progress progress">
 								<div class="progress-bar" style="width: 76.3%;"></div>
 							</div>
 							<div class="stats-desc">Better than last week (76.3%)</div>
+							<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -275,15 +284,21 @@
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-gradient-black">
-						<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+						
+						<!-- <div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div> -->
+
 						<div class="stats-content">
-							<div class="stats-title">TIME SPENT ON NON-PRODUCTIVE</div>
-							<div class="stats-number">3,988</div>
+							<div class="stats-title">@{{data_card['time_spent_on_new_websites']['label']}}</div>
+							<div class="stats-number">@{{data_card['time_spent_on_new_websites']['value']}} @{{data_card['time_spent_on_new_websites']['unit']}}</div>
 							<div class="stats-progress progress">
 								<div class="progress-bar" style="width: 54.9%;"></div>
 							</div>
 							<div class="stats-desc">Better than last week (54.9%)</div>
+							<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
 						</div>
+						</div>
+						
 					</div>
 				</div>
 				<!-- end col-3 -->
@@ -553,7 +568,8 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script>
     	
     var vm = new Vue({
@@ -562,11 +578,46 @@
 		mounted(){
           
            this.LoadMainChart();
+           this.getCardStats();
+           setInterval(function () {
+      this.getCardStats();
+    }.bind(this), 10000); 
+           //this.interval = setInterval(() => this.getCardStats(), 3000);
           // this.populateCategories();
 
         },
+  //       ready: function () {
+  //   this.getCardStats();
+
+    
+  // }
 		methods: {
 
+			getCardStats:function() {
+            //this.loading = true;
+            this.$http.get('http://localhost/cardstats').then(function(response){
+              if(response.status == "200")
+              {
+
+                this.data_card=response.body;
+                
+                console.log(this.data_card['total_time_during_day']['value']);   
+
+
+              } 
+              else
+              {
+                console.log(response);
+              } 
+      // console.log("Yes its here " +this.checkBox);
+//      console.log("Yes its here " +this.key);
+
+
+
+}.bind(this), function(response) {
+  alert("Something went wrong");
+});
+          },
 			LoadMainChart:function()
 			{
               //alert("cool");
@@ -628,7 +679,8 @@ vAxis: {
 		
 
 		data: {
-            
+            data_card:''
+            //interval:''
         }
 
 

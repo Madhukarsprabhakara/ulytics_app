@@ -431,6 +431,7 @@ class ComposerStaticInit81b34115a70747e55b5bc222a16e93da
         'App\\Http\\Controllers\\DbOperationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/DbOperationsController.php',
         'App\\Http\\Controllers\\ExtensionController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExtensionController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\StatsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatsController.php',
         'App\\Http\\Controllers\\UserSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserSessionController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
