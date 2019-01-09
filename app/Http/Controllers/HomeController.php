@@ -25,4 +25,8 @@ class HomeController extends Controller
     {
         return view('ulytics_views.index_v2');
     }
+    public function dashboard()
+    {
+        return view('ulytics_views.dashboardv1');
+    }
 }

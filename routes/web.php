@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboardv1','HomeController@dashboard');
 
 //Routes that need CORS disabled go here->middleware('disablecors')
 Route::get('/logincheck', 'UserSessionController@loginCheck')->middleware('disablecors');
