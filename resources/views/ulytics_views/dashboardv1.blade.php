@@ -1015,7 +1015,7 @@ vAxis: {
             mins:0,
             session_name:'Name your Session',
             timer_start_flag:false,
-            access_url: 'http://127.0.0.1:8000/'
+            access_url: 'http://54.193.10.239/'
         }
 
 
