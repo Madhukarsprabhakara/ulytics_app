@@ -37,7 +37,16 @@ class ExtensionController extends Controller
 				}
 				
 				$hashed_url=md5($request['url']);
-				
+				$parent_url_hash=$this->returnParentUrl($request['url']);
+				//Check if parent exists
+				$exists_parent=url_id_mapping::where('tab_hash_id',$parent_url_hash['hash'])->exists();
+				if (!$exists_parent)
+				{
+					$url_id_mapping_object = new url_id_mapping;
+					$url_id_mapping_object->tab_hash_id = $parent_url_hash['hash'];
+					$url_id_mapping_object->web_url=$parent_url_hash['url'];
+					$url_id_mapping_object->save();
+				}
 				//check if the hash already exists in the mapping table if not insert
 				$exists=url_id_mapping::where('tab_hash_id',$hashed_url)->exists();
 				//insert url and has md5 mapping in url_id_mapping table
@@ -54,7 +63,7 @@ class ExtensionController extends Controller
 				switch ($request['type']) {
 					case 1:
 
-						$transaction_id = user_transaction_details::create(['user_id'=>$user_id,'tab_hash_id'=>$hashed_url,'start_date_time'=>$request['start_date_time'],'timezone'=>$request['timezone']]);
+						$transaction_id = user_transaction_details::create(['user_id'=>$user_id,'tab_hash_id'=>$hashed_url,'parent_tab_hash_id'=>$parent_url_hash['hash'],'start_date_time'=>$request['start_date_time'],'timezone'=>$request['timezone']]);
    
 						return response()->json(['status' => 'Successfully created a Transaction','transaction_id'=>$transaction_id->id]);
 
@@ -88,5 +97,21 @@ class ExtensionController extends Controller
 		{
 			return $e->getMessage();
 		}
+    }
+    protected function returnParentUrl($url)
+    {
+    	try {
+    		$url_array=  parse_url($url);
+    		$hashed_url=md5($url_array['host']);
+    		$parent_url=$url_array['host'];
+    		$result['hash']=$hashed_url;
+    		$result['url']=$parent_url;
+    		return $result;
+    	}
+    	catch(\Exception $e)
+    	{
+    		$e->getMessage();
+    	}
+    	
     }
 }

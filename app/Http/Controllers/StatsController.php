@@ -29,6 +29,7 @@ class StatsController extends Controller
 			$json_card['no_of_new_websites_visited_today']=$this->getNoOfNewWebsitesVisitedForTheDay($date,$user_id,0);
 			$json_card['no_of_revisited_websites_today']=$this->getNoOfNewWebsitesVisitedForTheDay($date,$user_id,1);
 			$json_card['time_spent_on_new_websites']=$this->getTotalTimeSpentOnNewWebsitesVisitedForTheDay($date,$user_id);
+			$json_card['total_time_for_parent_url']=$this->getTotalTimeForParentUrlForTheDay($date,$user_id);
 			return $json_card;
 
 		//time spent on productive
@@ -82,7 +83,7 @@ class StatsController extends Controller
 			$no_urls = \DB::table('user_transaction_details')->distinct()
 			->where('user_id',$user_id)
 			->whereDate('start_date_time',$date )
-			->get(['tab_hash_id'])->count();
+			->get(['parent_tab_hash_id'])->count();
 			$result['value']= $no_urls;
 			$result['label']='NO OF WEBSITES VISITED TODAY';
 			return $result;
@@ -105,24 +106,24 @@ class StatsController extends Controller
 			$distinct_yesterday = \DB::table('user_transaction_details')->distinct()
 			->where('user_id',$user_id)
 			->whereDate('start_date_time',$date_yesterday)
-			->get(['tab_hash_id']);
+			->get(['parent_tab_hash_id']);
 			$distinct_yesterday=json_decode(json_encode($distinct_yesterday),TRUE);
 
 			foreach ($distinct_yesterday as $key=>$value)
 			{
-				$distinct_yest_arr[]=$value['tab_hash_id'];
+				$distinct_yest_arr[]=$value['parent_tab_hash_id'];
 			}
 			
 			//get todays distinct websites
 			$distinct_today = \DB::table('user_transaction_details')->distinct()
 			->where('user_id',$user_id)
 			->whereDate('start_date_time',$date )
-			->get(['tab_hash_id']);
+			->get(['parent_tab_hash_id']);
 			
 			$distinct_today=json_decode(json_encode($distinct_today),TRUE);
 			foreach ($distinct_today as $key=>$value)
 			{
-				$distinct_today_arr[]=$value['tab_hash_id'];
+				$distinct_today_arr[]=$value['parent_tab_hash_id'];
 			}
 			
 			//get diff between today and yesterday i,e today-yesterday	
@@ -234,6 +235,35 @@ class StatsController extends Controller
 		catch(\Exception $e)
 		{
 			$e->getMessage();
+		}
+	}
+	public function getTotalTimeForParentUrlForTheDay($date,$user_id)
+	{
+		try {
+			//fire the query
+			$get_top_n_with_names=user_transaction_details::where('user_id',$user_id)
+			->groupBy('parent_tab_hash_id')
+			->whereDate('start_date_time',$date)
+			->selectRaw('sum(total_time) as total, parent_tab_hash_id')->orderByRaw('sum(total_time) DESC')->pluck('total','parent_tab_hash_id')->take(7);
+			//->sum('total_time');
+
+			// $get_top_n_with_names1=\DB::table('user_transaction_details AS a')
+			// ->select(\DB:raw())
+			return $get_top_n_with_names;
+		}
+		catch (\Exception $e)
+		{
+			$e->getMessage();
+		}
+	}
+	public function getAverageTimeBetweenTabSwitches()
+	{
+		try {
+			
+		}
+		catch (\Exception $e)
+		{
+			return $e->getMessage();
 		}
 	}
 

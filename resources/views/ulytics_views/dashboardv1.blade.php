@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>Color Admin | Dashboard</title>
+	<title>dndsessions | Live a fullfilling life</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -28,12 +28,12 @@
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="../assets/plugins/pace/pace.min.js"></script>
+	<!-- <script src="../assets/plugins/pace/pace.min.js"></script> -->
 	<!-- ================== END BASE JS ================== -->
 </head>
 <body>
 	<!-- begin #page-loader -->
-	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+	<!-- <div id="page-loader" class="fade show"><span class="spinner"></span></div> -->
 	<!-- end #page-loader -->
 	
 	
@@ -43,7 +43,7 @@
 		<div id="header" class="header navbar-default">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>ulytics</b></a>
+				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>dndsessions</b></a>
 				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -167,8 +167,8 @@
 							</div>
 							<div class="info">
 								<b class="caret pull-right"></b>
-								Sean Ngu
-								<small>Front end developer</small>
+								{{\Auth::user()->name}}
+								<small>Technical Product Manager</small>
 							</div>
 						</a>
 					</li>
@@ -201,16 +201,17 @@
 					<!-- end sidebar minify button -->
 				</ul>
 				<!-- end sidebar nav -->
+
 			</div>
 			<!-- end sidebar scrollbar -->
 		</div>
 		<div class="sidebar-bg"></div>
 		<!-- end #sidebar -->
-		<div id="app">
+	
 		<!-- begin #content -->
 		<div id="content" class="content">
 			<!-- begin breadcrumb -->
-			
+				<div id="app">
 			<!-- end breadcrumb -->
 			<!-- begin page-header -->
 			<h1 class="page-header">Daily stats <small>A quick snapshot of your day so far.</small></h1>
@@ -227,7 +228,7 @@
 							<p>@{{data_card['total_urls_during_day']['value']}}</p>	
 						</div>
 						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+							<a href="#" >View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -289,27 +290,27 @@
 									<i class="fa fa-ellipsis-h f-s-14"></i>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="#">Option 1</a></li>
-									<li><a href="#">Option 2</a></li>
-									<li><a href="#">Option 3</a></li>
+									<li><a href="#">Time spent</a></li>
+									<li><a href="#">Sessions</a></li>
+									<li><a href="#">Table View</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Option 4</a></li>
+									<li><a href="#" >Option 4</a></li>
 								</ul>
 							</div>
 							
-							<h4 class="panel-title">Website Analytics (Last 7 Days)</h4>
+							<h4 class="panel-title">Most time spent websites </h4>
 						</div>
 						<div class="panel-body">
-							<div id="chart_div" class="height-sm"></div>
+							<div  id="chart_div" class="height-sm"></div>
 						</div>
 					</div>
 					<!-- end panel -->
 					
 					<!-- begin tabs -->
 					<ul class="nav nav-tabs nav-tabs-inverse nav-justified nav-justified-mobile" data-sortable-id="index-2">
-						<li class="nav-item"><a href="#latest-post" data-toggle="tab" class="nav-link active"><i class="fa fa-camera fa-lg m-r-5"></i> <span class="d-none d-md-inline">Latest Post</span></a></li>
-						<li class="nav-item"><a href="#purchase" data-toggle="tab" class="nav-link"><i class="fa fa-archive fa-lg m-r-5"></i> <span class="d-none d-md-inline">Purchase</span></a></li>
-						<li class="nav-item"><a href="#email" data-toggle="tab" class="nav-link"><i class="fa fa-envelope fa-lg m-r-5"></i> <span class="d-none d-md-inline">Email</span></a></li>
+						<li class="nav-item"><a href="#latest-post" data-toggle="tab" class="nav-link active"><i class="fa fa-camera fa-lg m-r-5"></i> <span class="d-none d-md-inline">Unclassified websites</span></a></li>
+						<li class="nav-item"><a href="#purchase" data-toggle="tab" class="nav-link"><i class="fa fa-archive fa-lg m-r-5"></i> <span class="d-none d-md-inline">Websites classified distracting</span></a></li>
+						<li class="nav-item"><a href="#email" data-toggle="tab" class="nav-link"><i class="fa fa-envelope fa-lg m-r-5"></i> <span class="d-none d-md-inline">Websites classified productive</span></a></li>
 					</ul>
 					<div class="tab-content" data-sortable-id="index-3">
 						<div class="tab-pane fade active show" id="latest-post">
@@ -654,6 +655,47 @@
 					<!-- end panel -->
 					
 					<!-- begin panel -->
+					<div class="panel panel-inverse">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+							</div>
+							<h4 class="panel-title">DND Sessions</h4>
+						</div>
+						<div class="panel-body">
+							<div class="height-sm" v-if="!timer_start_flag">
+								<label class="col-form-label col-md-9">Session Name:</label>
+								<div class="col-md-9 m-b-5">
+
+									<input type="text" class="form-control" v-model="session_name"  />
+									
+								
+								</div>
+								<label class="col-form-label col-md-9">Session Minutes:</label>
+								<div class="col-md-9 m-b-5">
+
+									<input type="number" class="form-control m-b-5" v-model="mins" />
+									<small class="f-s-12 text-grey-darker">Max time: 60 minutes. <i class="fas fa-question-circle"></i> </small>
+								</div>
+								<div class="col-md-9 m-b-5">
+								<button  @click="setTimer" class="btn btn-primary">Start</button>
+							</div>
+
+							</div>
+							<div class="height-sm" v-else>
+								<label class="col-form-label col-md-9">Timer:</label>
+								
+								<div class="col-md-9 m-b-5">
+									<button  @click="setTimer" class="btn btn-primary">Stop</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end panel -->
+					<!-- begin panel -->
 					<div class="panel panel-inverse" data-sortable-id="index-7">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
@@ -662,7 +704,7 @@
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 							</div>
-							<h4 class="panel-title">Visitors User Agent</h4>
+							<h4 class="panel-title">Time spent (Productive vs Unproductive)</h4>
 						</div>
 						<div class="panel-body">
 							<div id="donut-chart" class="height-sm"></div>
@@ -766,10 +808,12 @@
 				</div>
 				<!-- end col-4 -->
 			</div>
+
+			</div>
 			<!-- end row -->
 		</div>
 		<!-- end #content -->
-		</div>
+		
 		
 		
 		<!-- begin scroll to top btn -->
@@ -795,7 +839,8 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="../assets/plugins/gritter/js/jquery.gritter.js"></script>
+	<!-- <script src="../assets/plugins/gritter/js/jquery.gritter.js"></script> -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.min.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.time.min.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.resize.min.js"></script>
@@ -815,13 +860,14 @@
 	</script>
 
 	 <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
     <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script>
-    	
+    var global_chart_data='';
+    //var url='http://127.0.0.1/';	
     var vm = new Vue({
 		el:'#app',
 
@@ -829,9 +875,11 @@
           
            
            this.getCardStats();
+
            this.LoadMainChart();
            setInterval(function () {
       this.getCardStats();
+      this.LoadMainChart();
     }.bind(this), 10000); 
            //this.interval = setInterval(() => this.getCardStats(), 3000);
           // this.populateCategories();
@@ -844,15 +892,27 @@
   // }
 		methods: {
 
+			setTimer:function()
+          {
+              //alert("cool");
+              if (this.timer_start_flag==true)
+              {
+                this.timer_start_flag=false;
+              }
+              else
+              {
+                this.timer_start_flag=true; 
+              }
+          },
 			getCardStats:function() {
             //this.loading = true;
-            this.$http.get('http://127.0.0.1:8000/cardstats').then(function(response){
+            this.$http.get(this.access_url+'cardstats').then(function(response){
               if(response.status == "200")
               {
 
                 this.data_card=response.body;
                 
-                console.log(this.data_card['total_time_during_day']['value']);   
+                //console.log(this.data_card['total_time_during_day']['value']);   
 
 
               } 
@@ -872,6 +932,30 @@
 			LoadMainChart:function()
 			{
               //alert("cool");
+              this.$http.get(this.access_url+'chartsdata').then(function(response){
+              if(response.status == "200")
+              {
+
+                this.chart_data=response.body;
+                global_chart_data = this.chart_data;
+                 
+
+
+              } 
+              else
+              {
+                console.log(response);
+              } 
+      // console.log("Yes its here " +this.checkBox);
+//      console.log("Yes its here " +this.key);
+
+
+
+}.bind(this), function(response) {
+  alert("Something went wrong");
+});
+
+
               google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
@@ -882,17 +966,12 @@
       // draws it.
               function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Websites');
-        data.addRows([
-          ['laracasts', 100],
-          ['google', 200],
-          ['thankingli', 150],
-          ['ulytics', 50],
-          ['sopact', 80]
-        ]);
+
+        // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable(global_chart_data);
+
+            
+
 
       var view = new google.visualization.DataView(data);
       view.setColumns([0,	 
@@ -909,7 +988,7 @@
                         // 'width':500,
                         //'height':300,
                        'legend':'none',
-                       
+                       title: 'Time (in minutes)',
                        backgroundColor: { fill:'transparent' },
                        hAxis: {
     textStyle:{color: '#348FE2'}
@@ -922,16 +1001,21 @@ vAxis: {
                    		};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(view, options);
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
       }
           },
 		},
 		
 
 		data: {
-            data_card:''
-            
+            data_card:'',
+            chart_data:'',
+            mins:0,
+            session_name:'Name your Session',
+            timer_start_flag:false,
+            access_url: 'http://127.0.0.1:8000/'
         }
 
 

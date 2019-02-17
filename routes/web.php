@@ -27,6 +27,8 @@ Route::post('/pstats', 'ExtensionController@postTabStats')->middleware('disablec
 
 //CORS disabled until here
 Route::get('/cardstats','StatsController@getCardStats');
-
+Route::get('/urlmap','DbOperationsController@calculatePforTransac');
+Route::get('/chartsdata','GoogleChartDataController@getBarChartData');
+Route::get('/getpname','TableDataController@getAllUrlsGroupedByParentForTheDay');
 // Route::get('/checkme', 'UserSessionController@loginCheck')->middleware('disablecors');
 
