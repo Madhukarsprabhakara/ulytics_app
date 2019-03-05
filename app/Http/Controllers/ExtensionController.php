@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\user_transaction_details;
 use App\url_id_mapping;
+use App\Jobs\WatsonAPIJob;
 class ExtensionController extends Controller
 {
     //
@@ -37,6 +38,11 @@ class ExtensionController extends Controller
 				}
 				
 				$hashed_url=md5($request['url']);
+				//Dispatch url and hashed_url here
+				//WatsonAPIJob::dispatch($request['url'],$hashed_url);
+				//dispatch job only of sentiment analysis not available
+				//dispatch(new WatsonAPIJob($request['url'],$hashed_url));
+				
 				$parent_url_hash=$this->returnParentUrl($request['url']);
 				//Check if parent exists
 				$exists_parent=url_id_mapping::where('tab_hash_id',$parent_url_hash['hash'])->exists();

@@ -120,7 +120,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
-
+    'ibm' => env('IBM_NLP'),
     'cipher' => 'AES-256-CBC',
 
     /*

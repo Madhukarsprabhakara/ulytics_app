@@ -21,6 +21,7 @@ class GoogleChartDataController extends Controller
     		$user_id=\Auth::id();
 			//Get today's date
     		$date_time  = Carbon::now();
+            //return $date_time;
     		$date_time=$date_time->subMinutes(480);
     		//$date_time=$date_time->subDays(1);
     		$date=$date_time->toDateString();

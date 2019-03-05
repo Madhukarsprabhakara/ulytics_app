@@ -302,6 +302,16 @@
 						</div>
 						<div class="panel-body">
 							<div  id="chart_div" class="height-sm"></div>
+							<!--[if lte IE 8]>
+<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+<![endif]-->
+<!-- <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+<script>
+  hbspt.forms.create({
+	portalId: "2545577",
+	formId: "ad42d887-32e4-411c-8360-5e4e033fd0e5"
+});
+</script> -->
 						</div>
 					</div>
 					<!-- end panel -->
@@ -595,6 +605,56 @@
 				<!-- end col-8 -->
 				<!-- begin col-4 -->
 				<div class="col-lg-4">
+					
+					
+					<!-- begin panel -->
+					<div class="panel panel-inverse">
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+							</div>
+							<h4 class="panel-title">DND Sessions</h4>
+						</div>
+						<div class="panel-body">
+							<div class="height-sm" v-if="!timer_start_flag">
+								<label class="col-form-label col-md-9">Session Name:</label>
+								<div class="col-md-9 m-b-5">
+
+									<input type="text" class="form-control" v-model="session_name"  />
+									
+								
+								</div>
+								<label class="col-form-label col-md-9">Session Minutes:</label>
+								<div class="col-md-9 m-b-5">
+
+									<input type="number" class="form-control m-b-5" v-model="session_mins" />
+									<small class="f-s-12 text-grey-darker">Max time: 60 minutes. <i class="fas fa-question-circle"></i> </small>
+								</div>
+								<div class="col-md-9 m-b-5">
+								<button  @click="setTimer" class="btn btn-primary">Start</button>
+							</div>
+
+							</div>
+							<div class="height-sm" v-else>
+								<label class="col-form-label col-md-9">Timer:@{{session_secs_mins}} mins (@{{session_secs}} seconds) to go</label>
+								
+								<div class="col-md-9 m-b-5">
+									<button  @click="setTimer" class="btn btn-primary">Stop</button>
+								</div>
+								<div class="alert alert-danger fade show">
+									<span class="close" data-dismiss="alert">×</span>
+									<strong>Timer Started!</strong>
+									Please do not close or refresh the tab  
+									<!-- <a href="#" class="alert-link">an example link</a>.  -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end panel -->
+
 					<!-- begin panel -->
 					<div class="panel panel-inverse" data-sortable-id="index-6">
 						<div class="panel-heading">
@@ -656,47 +716,6 @@
 					
 					<!-- begin panel -->
 					<div class="panel panel-inverse">
-						<div class="panel-heading">
-							<div class="panel-heading-btn">
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-							</div>
-							<h4 class="panel-title">DND Sessions</h4>
-						</div>
-						<div class="panel-body">
-							<div class="height-sm" v-if="!timer_start_flag">
-								<label class="col-form-label col-md-9">Session Name:</label>
-								<div class="col-md-9 m-b-5">
-
-									<input type="text" class="form-control" v-model="session_name"  />
-									
-								
-								</div>
-								<label class="col-form-label col-md-9">Session Minutes:</label>
-								<div class="col-md-9 m-b-5">
-
-									<input type="number" class="form-control m-b-5" v-model="mins" />
-									<small class="f-s-12 text-grey-darker">Max time: 60 minutes. <i class="fas fa-question-circle"></i> </small>
-								</div>
-								<div class="col-md-9 m-b-5">
-								<button  @click="setTimer" class="btn btn-primary">Start</button>
-							</div>
-
-							</div>
-							<div class="height-sm" v-else>
-								<label class="col-form-label col-md-9">Timer:</label>
-								
-								<div class="col-md-9 m-b-5">
-									<button  @click="setTimer" class="btn btn-primary">Stop</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- end panel -->
-					<!-- begin panel -->
-					<div class="panel panel-inverse" data-sortable-id="index-7">
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
 								<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
@@ -883,26 +902,52 @@
     }.bind(this), 10000); 
            //this.interval = setInterval(() => this.getCardStats(), 3000);
           // this.populateCategories();
+          
 
-        },
   //       ready: function () {
   //   this.getCardStats();
-
+},
     
   // }
 		methods: {
 
 			setTimer:function()
-          {
+			{
               //alert("cool");
               if (this.timer_start_flag==true)
               {
-                this.timer_start_flag=false;
+              	//send end time to server
+
+              	
+              	this.timer_start_flag=false;
+              	this.session_mins=0;
+              	this.session_secs=0;
+              	clearInterval(this.refreshId);
               }
               else
               {
-                this.timer_start_flag=true; 
+              	//send start time to server
+              	this.timer_start_flag=true; 
+              	this.session_secs=this.session_mins*60;
+              	this.refreshId=setInterval(function () {
+              		this.setSession();
+              		if (this.session_secs == 0)
+              		{
+              	//send end time to server
+              	clearInterval(this.refreshId);
+              	alert("Session Over");
+              	this.timer_start_flag=false;
               }
+          }.bind(this), 1000);
+              }
+          },
+          setSession:function()
+          {
+              
+              this.session_secs=this.session_secs-1;
+              this.session_secs_mins=(this.session_secs/60).toFixed(1);
+
+              
           },
 			getCardStats:function() {
             //this.loading = true;
@@ -1012,10 +1057,13 @@ vAxis: {
 		data: {
             data_card:'',
             chart_data:'',
-            mins:0,
-            session_name:'Name your Session',
+            session_mins:0,
+            session_secs:0,
+            session_secs_mins:0,
+            session_name:'',
             timer_start_flag:false,
-            access_url: 'http://54.193.10.239/'
+            refreshId:'',
+            access_url: 'http://127.0.0.1:8000/'
         }
 
 

@@ -30,5 +30,6 @@ Route::get('/cardstats','StatsController@getCardStats');
 Route::get('/urlmap','DbOperationsController@calculatePforTransac');
 Route::get('/chartsdata','GoogleChartDataController@getBarChartData');
 Route::get('/getpname','TableDataController@getAllUrlsGroupedByParentForTheDay');
+Route::get('/getanalytics','UrlAnalyticsController@getIBM');
 // Route::get('/checkme', 'UserSessionController@loginCheck')->middleware('disablecors');
 
