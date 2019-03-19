@@ -9,7 +9,7 @@
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -886,6 +886,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script>
     var global_chart_data='';
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
     //var url='http://127.0.0.1/';	
     var vm = new Vue({
 		el:'#app',
@@ -911,22 +912,83 @@
   // }
 		methods: {
 
-			setTimer:function()
+			sessionStop:function()
 			{
-              //alert("cool");
-              if (this.timer_start_flag==true)
-              {
-              	//send end time to server
+				this.session_end_time=new Date();
+              	//var  time_zone = session_end_time.getTimezoneOffset();
+              	this.session_end_time = this.session_end_time.getFullYear() + "-" + (this.session_end_time.getMonth() + 1) + "-" + this.session_end_time.getDate() + " " +  this.session_end_time.getHours() + ":" + this.session_end_time.getMinutes() + ":" + this.session_end_time.getSeconds();
+              	this.$http.post(this.access_url+'sessions',{
 
-              	
+              		session_end_date_time:this.session_end_time,
+              		session_name:this.session_name,
+              		session_status:0,
+              		session_id:this.session_id,
+              		_token: this.token
+
+
+
+
+              	}).then(function(response){
+              		if(response.status == "200")
+              		{
+
+              			console.log(response.body);    
+
+
+              		} 
+              		else
+              		{
+              			console.log("Bad");
+              		} 
+      // console.log("Yes its here " +this.checkBox);
+//      console.log("Yes its here " +this.key);
+
+
+
+				});
               	this.timer_start_flag=false;
               	this.session_mins=0;
               	this.session_secs=0;
               	clearInterval(this.refreshId);
-              }
-              else
-              {
-              	//send start time to server
+			},
+			sessionStart:function()
+			{
+				  	//send start time to server
+              	//send end time to server
+              	this.session_start_time=new Date();
+              	var  time_zone = this.session_start_time.getTimezoneOffset();
+              	this.session_start_time = this.session_start_time.getFullYear() + "-" + (this.session_start_time.getMonth() + 1) + "-" + this.session_start_time.getDate() + " " +  this.session_start_time.getHours() + ":" + this.session_start_time.getMinutes() + ":" + this.session_start_time.getSeconds();
+              	
+
+              	this.$http.post(this.access_url+'sessions',{
+
+              		session_start_date_time:this.session_start_time,
+              		session_status:1,
+              		session_name:this.session_name,
+              		session_total_time:this.session_mins,
+              		_token: this.token
+
+
+
+
+              	}).then(function(response){
+              		if(response.status == "200")
+              		{
+
+              			this.session_id=response.body['data'];    
+
+
+              		} 
+              		else
+              		{
+              			console.log("Bad");
+              		} 
+      // console.log("Yes its here " +this.checkBox);
+//      console.log("Yes its here " +this.key);
+
+
+
+				});
               	this.timer_start_flag=true; 
               	this.session_secs=this.session_mins*60;
               	this.refreshId=setInterval(function () {
@@ -935,10 +997,30 @@
               		{
               	//send end time to server
               	clearInterval(this.refreshId);
-              	alert("Session Over");
+              	//alert("Session Over");
+              	this.sessionStop();
               	this.timer_start_flag=false;
               }
           }.bind(this), 1000);
+              },
+			setTimer:function()
+			{
+              //alert("cool");
+              if (this.session_mins > 60)
+              {
+              	alert("Max time is 60 minutes");
+              	exit;
+              }
+              if (this.timer_start_flag==true)
+              {
+              	
+              		this.sessionStop();
+              		
+              }
+              else
+              {
+            		//session start
+            		this.sessionStart();
               }
           },
           setSession:function()
@@ -1062,8 +1144,13 @@ vAxis: {
             session_secs_mins:0,
             session_name:'',
             timer_start_flag:false,
+            timer_id:'',
             refreshId:'',
-            access_url: 'http://127.0.0.1:8000/'
+            token:csrf_token,
+            access_url: 'http://127.0.0.1:8000/',
+            session_start_time:'',
+            session_end_time:'',
+            session_id:''
         }
 
 
