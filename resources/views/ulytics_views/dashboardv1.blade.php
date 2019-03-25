@@ -1147,7 +1147,7 @@ vAxis: {
             timer_id:'',
             refreshId:'',
             token:csrf_token,
-            access_url: 'http://127.0.0.1:8000/',
+            access_url: 'http://54.193.10.239/',
             session_start_time:'',
             session_end_time:'',
             session_id:''
