@@ -18,7 +18,7 @@ class CreateDndsessionsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('session_name',500);
-            $table->timestamp('session_start_time');
+            $table->timestamp('session_start_time')->nullable();
             $table->timestamp('session_end_time')->nullable();
             $table->timestamp('session_intermediate_end_time')->nullable();
             $table->bigInteger('session_total_time')->nullable();
