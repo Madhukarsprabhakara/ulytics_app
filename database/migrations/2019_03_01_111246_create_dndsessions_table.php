@@ -23,7 +23,7 @@ class CreateDndsessionsTable extends Migration
             $table->timestamp('session_intermediate_end_time')->nullable();
             $table->bigInteger('session_total_time')->nullable();
             $table->integer('session_timezone')->nullable();
-            $table->integer('status')->nullable(); //In progress-1, Paused-2, completed-0
+            $table->integer('status')->nullable(); //In progress-1, Paused-2, completed-0 test
             $table->timestamps();
         });
     }
