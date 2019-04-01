@@ -298,7 +298,7 @@
 								</ul>
 							</div>
 							
-							<h4 class="panel-title">Most time spent websites </h4>
+							<h4 class="panel-title">Significant time spent on following websites</h4>
 						</div>
 						<div class="panel-body">
 							<div  id="chart_div" class="height-sm"></div>
@@ -894,9 +894,11 @@
 		mounted(){
           
            
+
            this.getCardStats();
 
            this.LoadMainChart();
+           this.getSessions();
            setInterval(function () {
       this.getCardStats();
       this.LoadMainChart();
@@ -1031,35 +1033,69 @@
 
               
           },
-			getCardStats:function() {
+          getCardStats:function() {
             //this.loading = true;
             this.$http.get(this.access_url+'cardstats').then(function(response){
-              if(response.status == "200")
-              {
+            	if(response.status == "200")
+            	{
 
-                this.data_card=response.body;
-                
+            		this.data_card=response.body;
+
                 //console.log(this.data_card['total_time_during_day']['value']);   
 
 
-              } 
-              else
-              {
-                console.log(response);
-              } 
+            } 
+            else
+            {
+            	console.log(response);
+            } 
       // console.log("Yes its here " +this.checkBox);
 //      console.log("Yes its here " +this.key);
 
 
 
 }.bind(this), function(response) {
-  alert("Something went wrong");
+	alert("Something went wrong");
 });
-          },
+        },
+        	getSessions:function() {
+            //this.loading = true;
+            this.todays_date=new Date;
+            this.todays_date = this.todays_date.getFullYear() + "-" + (this.todays_date.getMonth() + 1) + "-" + this.todays_date.getDate();
+            this.$http.get(this.access_url+'getsessions',{params:  {date_select:this.todays_date}
+            	
+
+            }).then(function(response){
+            	if(response.status == "200")
+            	{
+
+            		this.date_sessions=response.body;
+            		console.log(date_sessions);
+                //console.log(this.data_card['total_time_during_day']['value']);   
+
+
+            } 
+            else
+            {
+            	console.log(response);
+            } 
+      // console.log("Yes its here " +this.checkBox);
+//      console.log("Yes its here " +this.key);
+
+
+
+}.bind(this), function(response) {
+	alert("Something went wrong");
+});
+        },
 			LoadMainChart:function()
 			{
               //alert("cool");
-              this.$http.get(this.access_url+'chartsdata').then(function(response){
+              this.analytics_type=1;
+              this.$http.get(this.access_url+'chartsdata',{params:  {analytics_type:this.analytics_type}
+            	
+
+            }).then(function(response){
               if(response.status == "200")
               {
 
@@ -1079,7 +1115,7 @@
 
 
 }.bind(this), function(response) {
-  alert("Something went wrong");
+  alert(response);
 });
 
 
@@ -1150,7 +1186,11 @@ vAxis: {
             access_url: 'http://54.193.10.239/',
             session_start_time:'',
             session_end_time:'',
-            session_id:''
+            session_id:'',
+            todays_date:'',
+            date_sessions:'',
+            analytics_type:''
+
         }
 
 

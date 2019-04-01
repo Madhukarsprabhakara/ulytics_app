@@ -256,6 +256,25 @@ class StatsController extends Controller
 			$e->getMessage();
 		}
 	}
+	public function getTotalTimeForSessions($beginDate,$endDate,$user_id,$session_id)
+	{
+		try {
+			//fire the query
+			$get_top_n_with_names=user_transaction_details::where('user_id',$user_id)
+			->groupBy('parent_tab_hash_id')
+			->whereBetween('start_date_time',[$beginDate, $endDate])
+			->selectRaw('sum(total_time) as total, parent_tab_hash_id')->orderByRaw('sum(total_time) DESC')->pluck('total','parent_tab_hash_id');
+			//->sum('total_time');
+
+			// $get_top_n_with_names1=\DB::table('user_transaction_details AS a')
+			// ->select(\DB:raw())
+			return $get_top_n_with_names;
+		}
+		catch (\Exception $e)
+		{
+			$e->getMessage();
+		}
+	}
 	public function getAverageTimeBetweenTabSwitches()
 	{
 		try {

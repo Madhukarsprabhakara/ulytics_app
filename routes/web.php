@@ -32,5 +32,6 @@ Route::get('/chartsdata','GoogleChartDataController@getBarChartData');
 Route::get('/getpname','TableDataController@getAllUrlsGroupedByParentForTheDay');
 Route::get('/getanalytics','UrlAnalyticsController@getIBM');
 Route::post('/sessions','DNDSessionsController@setSessions');
+Route::get('/getsessions','DNDSessionsController@getSessionsForTheDay');
 // Route::get('/checkme', 'UserSessionController@loginCheck')->middleware('disablecors');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 //call the controller you want to use its methods
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\DNDSessionsController;
 use Illuminate\Http\Request;
 //call the controller you want to use its methods
 //use App\Http\Controllers\StatsController;
@@ -11,10 +12,22 @@ use Carbon\Carbon;
 class GoogleChartDataController extends Controller
 {
     //
-    protected function getBarChartData()
+    protected function getBarChartData(Request $request)
     {
     	
     	try {
+            $user_id=\Auth::id();
+            $validator = \Validator::make($request->all(), [
+                //'url' => 'required|url',
+                'analytics_type' => 'required|numeric',
+                'session_id'=> 'nullable|numeric'
+
+
+            ]);
+            if ($validator->fails())
+            {
+                return $validator->errors();
+            }
     		$array=[];
     		$final_array=[];
     		//Current date
@@ -27,8 +40,20 @@ class GoogleChartDataController extends Controller
     		$date=$date_time->toDateString();
     		//get hex and minutes
     		$stats_object = new StatsController;
+            if ($request['analytics_type']==1)
+            {
+                $data= $stats_object->getTotalTimeForParentUrlForTheDay($date,$user_id);
+            }
+            else
+            {
+                $session_object=new DNDSessionsController;
+                $session_data=$session_object->getSessionActivity(18);
 
-    		$data= $stats_object->getTotalTimeForParentUrlForTheDay($date,$user_id);
+                
+                $data= $stats_object->getTotalTimeForSessions($session_data[0]->session_start_time,$session_data[0]->session_end_time,$user_id,18);
+                //return $data;
+            }
+    		
     		$final_array[]=['Websites','mins',['role'=> 'annotation']];
     	//get names for the hex and put it in the array
     		foreach ($data as $key=>$value)

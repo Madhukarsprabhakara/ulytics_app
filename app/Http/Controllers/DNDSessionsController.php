@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\dndsessions;
-
+use App\Http\Controllers\StatsController;
 class DNDSessionsController extends Controller
 {
-    
+
 	public function setSessions(Request $request)
 	{
 
-        $user_id=\Auth::id();
+
         try {
+            $user_id=\Auth::id();
             $validator = \Validator::make($request->all(), [
                 //'url' => 'required|url',
                 'session_start_date_time' => 'nullable|date',
@@ -25,8 +26,12 @@ class DNDSessionsController extends Controller
                 'session_id'=>'nullable|numeric'
 
 
-                ]);
-            
+            ]);
+            if ($validator->fails())
+            {
+                return $validator->errors();
+            }
+
             if ($request['session_total_time']>60)
             {
                 $arr = array('message' => 'Session duration cannot be more than 60 minutes', 'status' => 0);
@@ -52,10 +57,13 @@ class DNDSessionsController extends Controller
             }
             else
             {
-                \DB::table('dndsessions')
-            ->where('user_id', $user_id)
-            ->where('id',$request['session_id'])
-            ->update(['session_end_time' => $request['session_end_date_time']]);
+                $session_info=\DB::table('dndsessions')
+                ->where('user_id', $user_id)
+                ->where('id',$request['session_id'])
+                ->update(['session_end_time' => $request['session_end_date_time']]);
+
+                return dndsessions::where('id',$request['session_id'])->get();
+                //return $session_info;
             }
             
             //return $request->all();
@@ -83,8 +91,46 @@ class DNDSessionsController extends Controller
     	//status
     	//total_time	
 
-	}
+    }
+    public function getSessionsForTheDay(Request $request)
+    {
+        try {
+            $user_id=\Auth::id();
+            $validator = \Validator::make($request->all(), [
+                //'url' => 'required|url',
+                'date_select' => 'nullable|date'
 
+
+            ]);
+            if ($validator->fails())
+            {
+                return $validator->errors();
+            }
+
+            $sessions=dndsessions::whereDate('created_at',$request['date_select'])->where('user_id',$user_id)->get();
+            return $sessions;
+
+
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
+    public function getSessionActivity($session_id)
+    {
+        try {
+            $user_id=\Auth::id();
+            
+            $session_info=dndsessions::where('id',$session_id)->get();
+            return $session_info;
+
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
     
 
 }
