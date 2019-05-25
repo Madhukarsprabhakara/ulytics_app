@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\user_transaction_details;
 use App\url_id_mapping;
 use Carbon\Carbon;
+use App\dndsessions;
 class StatsController extends Controller
 {
     //
@@ -30,6 +31,7 @@ class StatsController extends Controller
 			$json_card['no_of_revisited_websites_today']=$this->getNoOfNewWebsitesVisitedForTheDay($date,$user_id,1);
 			$json_card['time_spent_on_new_websites']=$this->getTotalTimeSpentOnNewWebsitesVisitedForTheDay($date,$user_id);
 			$json_card['total_time_for_parent_url']=$this->getTotalTimeForParentUrlForTheDay($date,$user_id);
+			$json_card['no_of_sessions_today']=$this->getNoOfSessions($date,$user_id);
 			return $json_card;
 
 		//time spent on productive
@@ -283,6 +285,24 @@ class StatsController extends Controller
 		catch (\Exception $e)
 		{
 			return $e->getMessage();
+		}
+	}
+	public function getNoOfSessions($date,$user_id)
+	{
+		try {
+			
+    		$no_sessions = \DB::table('dndsessions')
+			->where('user_id',$user_id)
+			->whereDate('session_start_time',$date )
+			->get()->count();
+			$result['value']= $no_sessions;
+			$result['label']='NO OF DND SESSIONS';
+			return $result;
+
+		}
+		catch (\Exception $e)
+		{
+			$e->getMessage();
 		}
 	}
 

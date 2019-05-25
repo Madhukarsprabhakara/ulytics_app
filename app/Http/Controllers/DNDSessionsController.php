@@ -57,6 +57,8 @@ class DNDSessionsController extends Controller
             }
             else
             {
+                $session_object=dndsessions::where('id',$request['session_id'])->get();
+                
                 $session_info=\DB::table('dndsessions')
                 ->where('user_id', $user_id)
                 ->where('id',$request['session_id'])

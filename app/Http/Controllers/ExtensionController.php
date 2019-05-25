@@ -41,6 +41,7 @@ class ExtensionController extends Controller
 				//Dispatch url and hashed_url here
 				//WatsonAPIJob::dispatch($request['url'],$hashed_url);
 				//dispatch job only of sentiment analysis not available
+				
 				//dispatch(new WatsonAPIJob($request['url'],$hashed_url));
 				
 				$parent_url_hash=$this->returnParentUrl($request['url']);

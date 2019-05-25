@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
+use App\concepts;
+use App\categories;
+use App\sentiment;
+
+use App\url_categories;
+use App\url_concepts;
+use App\url_sentiment;
+
 class UrlAnalyticsController extends Controller
 {
     //
-    public $url;
-    public function __construct($url)
+    public $url,$url_hashed;
+    public function __construct($url,$url_hashed)
     {
         $this->url=$url;
+        $this->url_hashed=$url_hashed;
     }
     public function getIBM()
     {
@@ -25,7 +34,7 @@ class UrlAnalyticsController extends Controller
 
             curl_setopt($ch, CURLOPT_URL, 'https://gateway.watsonplatform.net/natural-language-understanding/api/v1/analyze?version=2018-11-16');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"url\": \"$url\", \"features\": { \"sentiment\": {}, \"categories\": {}, \"concepts\": {} } }");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "{ \"url\": \"$url\", \"features\": { \"sentiment\": {}, \"categories\": {}, \"concepts\": {},\"emotion\": {} } }");
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_USERPWD, 'apikey' . ':' . config('app.ibm'));
 
@@ -49,6 +58,122 @@ class UrlAnalyticsController extends Controller
     }
     public function checkNLPAvailability()
     {
+            //sentiment
+            //$sentiment_exists=sentiment::where('sentiment_hash_id',md5($sentiment_analysis_array['sentiment']['document']['label']))->exists();
+            //sentiment url mapping exists
+        try {
+            $sentiment_url_exists=url_sentiment::where('tab_hash_id',$this->url_hashed)->exists();
+
+            //emotion
+
+            //emotion url exists
+
+            //category
+            
+            
+            //category url exists
+            $category_url_exists=url_categories::where('tab_hash_id',$this->url_hashed)->exists();
+            //concept
+
+            //concept url exists
+            $concept_url_exists=url_concepts::where('tab_hash_id',$this->url_hashed)->exists();
+
+            if ($sentiment_url_exists and $category_url_exists and $concept_url_exists)
+            {
+                return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+
+            
+
+    }
+    public function addNlpData($sentiment_analysis_array)
+    {
+        try {
+            
+            
+            $sentiment_object=new sentiment;
+            $sentiment_exists=sentiment::where('sentiment_hash_id',md5($sentiment_analysis_array['sentiment']['document']['label']))->exists();
+
+            if (!$sentiment_exists)
+            {
+                
+                $sentiment_object->sentiment_name=$sentiment_analysis_array['sentiment']['document']['label'];
+                //$concept_object->sentiment_hash_id=md5($sentiment_analysis_array['sentiment']['document']['label']);
+                $sentiment_object->sentiment_hash_id=md5($sentiment_analysis_array['sentiment']['document']['label']);
+                $sentiment_object->save();
+            }
+            else
+            {
+                $sentiment_object=sentiment::where('sentiment_hash_id',md5($sentiment_analysis_array['sentiment']['document']['label']))->get();
+            }
+            $url_sentiment_obj=new url_sentiment;
+            $url_sentiment_obj->sentiment_id=$sentiment_object->id;
+            $url_sentiment_obj->tab_hash_id=$this->url_hashed;
+            $url_sentiment_obj->sentiment_score=$sentiment_analysis_array['sentiment']['document']['score'];
+            $url_sentiment_obj->save();
+
+            foreach ($sentiment_analysis_array['categories'] as $category)
+            {
+                $category_object=new categories;
+               $category_hash_id=md5($category['label']);
+               $category_exists=categories::where('category_hash_id',$category_hash_id)->exists();
+               if (!$category_exists)
+               {
+                    $category_object1=new categories;
+                    $category_object1->category_name=$category['label'];
+                    $category_object1->category_hash_id=$category_hash_id;
+                    $category_object1->save();
+               }
+               else
+               {
+                    $category_object1=new categories;
+                    $category_object1=categories::where('category_hash_id',$category_hash_id)->get();
+               }
+               $category_url_object=new url_categories;
+               $category_url_object->tab_hash_id=$this->url_hashed;
+               $category_url_object->category_id=$category_object1->id;
+               $category_url_object->category_score=$category['score'];
+               $category_url_object->save();
+
+            }
+            foreach ($sentiment_analysis_array['concepts'] as $concept)
+            {
+                $concept_object=new concepts;
+               $concept_hash_id=md5($concept['text']);
+               $concept_exists=$concept_object::where('concept_hash_id',$concept_hash_id)->exists();
+               if (!$concept_exists)
+               {
+                    $concept_object->concept_name=$concept['text'];
+                    $concept_object->concept_hash_id=$concept_hash_id;
+                    $concept_object->save();
+               }
+               else
+               {
+                    $concept_object=concepts::where('concept_hash_id',$concept_hash_id)->get();
+               }
+               $concept_url_object=new url_concepts;
+               $concept_url_object->tab_hash_id=$this->url_hashed;
+               $concept_url_object->concept_id=$concept_object->id;
+               $concept_url_object->concept_relevance=$category['relevance'];
+               $concept_url_object->save();
+            }
+            return "Success";
+
+            
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
         
     }
 }

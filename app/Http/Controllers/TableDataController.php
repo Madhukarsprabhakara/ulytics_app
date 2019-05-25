@@ -14,13 +14,17 @@ class TableDataController extends Controller
     {
     	//get parent and child 
     	//Get today's date
+        //,\DB::raw('utd.total_time div 60000 as total_time')
     	try {
     		$date_time  = Carbon::now();
-    		$date_time=$date_time->subMinutes(480);
-
+            //return $date_time;
+    		$date_time=$date_time->subMinutes(420);
+            
     		$date=$date_time->toDateString();
+            //return $date;
     		$user_id=\Auth::id();
     		$users_data = \DB::table('user_transaction_details as utd')
+
     		->join('url_id_mappings as uim', 'utd.tab_hash_id', '=', 'uim.tab_hash_id')
     		->join('url_id_mappings as uim2', 'utd.parent_tab_hash_id', '=', 'uim2.tab_hash_id')
     		->leftJoin('url_productivity_classifications as upc', 'utd.tab_hash_id', '=', 'upc.tab_hash_id')
@@ -28,8 +32,9 @@ class TableDataController extends Controller
     		->whereDate('start_date_time','>=',$date)
     		->where('utd.user_id',$user_id)
     		->distinct('utd.tab_hash_id')
+            // ->groupBy('utd.parent_tab_hash_id')
     		->get();
-
+            //return $users_data;
     		$array_user=json_decode($users_data);
     		$tab_hash_id=array();
     		$fromatted_array=array();
