@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>dndsessions | Live a fullfilling life</title>
+	<title>dndsessions | organize your life</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -24,6 +24,15 @@
 	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 	<link href="../assets/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
 	<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+	<link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/AutoFill/css/autoFill.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/ColReorder/css/colReorder.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/KeyTable/css/keyTable.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/RowReorder/css/rowReorder.bootstrap.min.css" rel="stylesheet" />
+	<link href="../assets/plugins/DataTables/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
 	<!-- <link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" /> -->
 	<!-- ================== END PAGE LEVEL STYLE ================== -->
 	
@@ -247,21 +256,8 @@
 					</div>
 				</div>
 				<!-- end col-3 -->
-				<!-- begin col-3 -->
-				<div class="col-lg-3 col-md-6">
-					<div class="widget widget-stats bg-gradient-black">
-						<!-- <div class="stats-icon"><i class="fa fa-users"></i></div> -->
 
-						<div class="stats-info">
-							<h4>@{{data_card['no_of_new_websites_visited_today']['label']}}</h4>
-							<p>@{{data_card['no_of_new_websites_visited_today']['value']}}</p>	
-						</div>
-						<div class="stats-link">
-							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
-						</div>
-					</div>
-				</div>
-				<!-- end col-3 -->
+
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-gradient-teal">
@@ -276,6 +272,22 @@
 					</div>
 				</div>
 				<!-- end col-3 -->
+				<!-- begin col-3 -->
+				<div class="col-lg-3 col-md-6">
+					<div class="widget widget-stats bg-gradient-black">
+						<!-- <div class="stats-icon"><i class="fa fa-users"></i></div> -->
+
+						<div class="stats-info">
+							<h4>@{{data_card['no_of_sessions_today']['label']}}</h4>
+							<p>@{{data_card['no_of_sessions_today']['value']}}</p>	
+						</div>
+						<div class="stats-link">
+							<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- end col-3 -->
+				
 			</div>
 			<!-- end row -->
 			<!-- begin row -->
@@ -286,22 +298,31 @@
 					<div class="panel panel-inverse" data-sortable-id="index-1">
 						<div class="panel-heading">
 							<div class="widget-list-action">
+								
+
+
 								<a href="#" data-toggle="dropdown" class="text-muted pull-right">
 									<i class="fa fa-ellipsis-h f-s-14"></i>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="#">Time spent</a></li>
-									<li><a href="#">Sessions</a></li>
-									<li><a href="#">Table View</a></li>
-									<li class="divider"></li>
-									<li><a href="#" >Option 4</a></li>
+									<li class="active"><a href="#" >Default</a></li>
+									<li><a href="#" >Sessions</a></li>
+									<li><a href="#" >Table View</a></li>
+									
 								</ul>
+								
+
 							</div>
+							
 							
 							<h4 class="panel-title">Significant time spent on following websites</h4>
 						</div>
 						<div class="panel-body">
-							<div  id="chart_div" class="height-sm"></div>
+
+							<div   id="chart_div" class="height-sm"></div>
+							
+						
+					<!-- </div> -->
 							<!--[if lte IE 8]>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
 <![endif]-->
@@ -666,50 +687,538 @@
 							</div>
 							<h4 class="panel-title">Analytics Details</h4>
 						</div>
-						<div class="panel-body p-t-0">
-							<div class="table-responsive">
-								<table class="table table-valign-middle">
-									<thead>
-										<tr>	
-											<th>Source</th>
-											<th>Total</th>
-											<th>Trend</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><label class="label label-danger">Unique Visitor</label></td>
-											<td>13,203 <span class="text-success"><i class="fa fa-arrow-up"></i></span></td>
-											<td><div id="sparkline-unique-visitor"></div></td>
-										</tr>
-										<tr>
-											<td><label class="label label-warning">Bounce Rate</label></td>
-											<td>28.2%</td>
-											<td><div id="sparkline-bounce-rate"></div></td>
-										</tr>
-										<tr>
-											<td><label class="label label-success">Total Page Views</label></td>
-											<td>1,230,030</td>
-											<td><div id="sparkline-total-page-views"></div></td>
-										</tr>
-										<tr>
-											<td><label class="label label-primary">Avg Time On Site</label></td>
-											<td>00:03:45</td>
-											<td><div id="sparkline-avg-time-on-site"></div></td>
-										</tr>
-										<tr>
-											<td><label class="label label-default">% New Visits</label></td>
-											<td>40.5%</td>
-											<td><div id="sparkline-new-visits"></div></td>
-										</tr>
-										<tr>
-											<td><label class="label label-inverse">Return Visitors</label></td>
-											<td>73.4%</td>
-											<td><div id="sparkline-return-visitors"></div></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+						<div class="panel-body p-t-20">
+							<div   class="height-sm" data-scrollbar="true">
+							<table id="data-table-combine" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th width="1%"></th>
+										<th width="1%" data-orderable="false"></th>
+										<th class="text-nowrap">Rendering engine</th>
+										<th class="text-nowrap">Browser</th>
+										<th class="text-nowrap">Platform(s)</th>
+										<th class="text-nowrap">Engine version</th>
+										<th class="text-nowrap">CSS grade</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="odd gradeX">
+										<td width="1%" class="f-s-600 text-inverse">1</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>Internet Explorer 4.0</td>
+										<td>Win 95+</td>
+										<td>4</td>
+										<td>X</td>
+									</tr>
+									<tr class="even gradeC">
+										<td width="1%" class="f-s-600 text-inverse">2</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-2.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>Internet Explorer 5.0</td>
+										<td>Win 95+</td>
+										<td>5</td>
+										<td>C</td>
+									</tr>
+									<tr class="odd gradeA">
+										<td width="1%" class="f-s-600 text-inverse">3</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-3.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>Internet Explorer 5.5</td>
+										<td>Win 95+</td>
+										<td>5.5</td>
+										<td>A</td>
+									</tr>
+									<tr class="even gradeA">
+										<td width="1%" class="f-s-600 text-inverse">4</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-4.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>Internet Explorer 6</td>
+										<td>Win 98+</td>
+										<td>6</td>
+										<td>A</td>
+									</tr>
+									<tr class="odd gradeA">
+										<td width="1%" class="f-s-600 text-inverse">5</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-5.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>Internet Explorer 7</td>
+										<td>Win XP SP2+</td>
+										<td>7</td>
+										<td>A</td>
+									</tr>
+									<tr class="even gradeA">
+										<td width="1%" class="f-s-600 text-inverse">6</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-6.jpg" class="img-rounded height-30" /></td>
+										<td>Trident</td>
+										<td>AOL browser (AOL desktop)</td>
+										<td>Win XP</td>
+										<td>6</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">7</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-7.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Firefox 1.0</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">8</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-8.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Firefox 1.5</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">9</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-9.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Firefox 2.0</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">10</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-10.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Firefox 3.0</td>
+										<td>Win 2k+ / OSX.3+</td>
+										<td>1.9</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">11</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-11.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Camino 1.0</td>
+										<td>OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">12</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-12.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Camino 1.5</td>
+										<td>OSX.3+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">13</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-13.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Netscape 7.2</td>
+										<td>Win 95+ / Mac OS 8.6-9.2</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">14</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-14.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Netscape Browser 8</td>
+										<td>Win 98SE+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">15</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Netscape Navigator 9</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">16</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-2.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.0</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">17</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-3.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.1</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.1</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">18</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-4.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.2</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.2</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">19</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-5.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.3</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.3</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">20</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-6.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.4</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.4</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">21</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-7.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.5</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.5</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">22</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-8.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.6</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.6</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">23</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-9.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.7</td>
+										<td>Win 98+ / OSX.1+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">24</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-10.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Mozilla 1.8</td>
+										<td>Win 98+ / OSX.1+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">25</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-11.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Seamonkey 1.1</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">26</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-12.jpg" class="img-rounded height-30" /></td>
+										<td>Gecko</td>
+										<td>Epiphany 2.20</td>
+										<td>Gnome</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">27</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-13.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>Safari 1.2</td>
+										<td>OSX.3</td>
+										<td>125.5</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">28</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-14.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>Safari 1.3</td>
+										<td>OSX.3</td>
+										<td>312.8</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">29</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>Safari 2.0</td>
+										<td>OSX.4+</td>
+										<td>419.3</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">30</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-2.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>Safari 3.0</td>
+										<td>OSX.4+</td>
+										<td>522.1</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">31</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-3.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>OmniWeb 5.5</td>
+										<td>OSX.4+</td>
+										<td>420</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">32</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-4.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>iPod Touch / iPhone</td>
+										<td>iPod</td>
+										<td>420.1</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">33</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-5.jpg" class="img-rounded height-30" /></td>
+										<td>Webkit</td>
+										<td>S60</td>
+										<td>S60</td>
+										<td>413</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">34</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-6.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 7.0</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">35</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-7.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 7.5</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">36</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-8.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 8.0</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">37</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-9.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 8.5</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">38</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-10.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 9.0</td>
+										<td>Win 95+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">39</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-11.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 9.2</td>
+										<td>Win 88+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">40</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-12.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera 9.5</td>
+										<td>Win 88+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">41</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-13.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Opera for Wii</td>
+										<td>Wii</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">42</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-14.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Nokia N800</td>
+										<td>N800</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">43</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="img-rounded height-30" /></td>
+										<td>Presto</td>
+										<td>Nintendo DS browser</td>
+										<td>Nintendo DS</td>
+										<td>8.5</td>
+										<td>C/A<sup>1</sup></td>
+									</tr>
+									<tr class="gradeC">
+										<td width="1%" class="f-s-600 text-inverse">44</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-2.jpg" class="img-rounded height-30" /></td>
+										<td>KHTML</td>
+										<td>Konqureror 3.1</td>
+										<td>KDE 3.1</td>
+										<td>3.1</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">45</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-3.jpg" class="img-rounded height-30" /></td>
+										<td>KHTML</td>
+										<td>Konqureror 3.3</td>
+										<td>KDE 3.3</td>
+										<td>3.3</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">46</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-4.jpg" class="img-rounded height-30" /></td>
+										<td>KHTML</td>
+										<td>Konqureror 3.5</td>
+										<td>KDE 3.5</td>
+										<td>3.5</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeX">
+										<td width="1%" class="f-s-600 text-inverse">47</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-5.jpg" class="img-rounded height-30" /></td>
+										<td>Tasman</td>
+										<td>Internet Explorer 4.5</td>
+										<td>Mac OS 8-9</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr class="gradeC">
+										<td width="1%" class="f-s-600 text-inverse">48</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-6.jpg" class="img-rounded height-30" /></td>
+										<td>Tasman</td>
+										<td>Internet Explorer 5.1</td>
+										<td>Mac OS 7.6-9</td>
+										<td>1</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeC">
+										<td width="1%" class="f-s-600 text-inverse">49</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-7.jpg" class="img-rounded height-30" /></td>
+										<td>Tasman</td>
+										<td>Internet Explorer 5.2</td>
+										<td>Mac OS 8-X</td>
+										<td>1</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">50</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-8.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>NetFront 3.1</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeA">
+										<td width="1%" class="f-s-600 text-inverse">51</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-9.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>NetFront 3.4</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr class="gradeX">
+										<td width="1%" class="f-s-600 text-inverse">52</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-10.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>Dillo 0.8</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr class="gradeX">
+										<td width="1%" class="f-s-600 text-inverse">53</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-11.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>Links</td>
+										<td>Text only</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr class="gradeX">
+										<td width="1%" class="f-s-600 text-inverse">54</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-12.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>Lynx</td>
+										<td>Text only</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr class="gradeC">
+										<td width="1%" class="f-s-600 text-inverse">55</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-13.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>IE Mobile</td>
+										<td>Windows Mobile 6</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeC">
+										<td width="1%" class="f-s-600 text-inverse">57</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-14.jpg" class="img-rounded height-30" /></td>
+										<td>Misc</td>
+										<td>PSP browser</td>
+										<td>PSP</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr class="gradeU">
+										<td width="1%" class="f-s-600 text-inverse">58</td>
+										<td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="img-rounded height-30" /></td>
+										<td>Other browsers</td>
+										<td>All others</td>
+										<td>-</td>
+										<td>-</td>
+										<td>U</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+							
 						</div>
 					</div>
 					<!-- end panel -->
@@ -858,6 +1367,25 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+
+	<script src="../assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+	<script src="../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/buttons.flash.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/jszip.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/pdfmake.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/vfs_fonts.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/buttons.html5.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/AutoFill/js/dataTables.autoFill.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/ColReorder/js/dataTables.colReorder.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/KeyTable/js/dataTables.keyTable.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/RowReorder/js/dataTables.rowReorder.min.js"></script>
+	<script src="../assets/plugins/DataTables/extensions/Select/js/dataTables.select.min.js"></script>
+	<script src="../assets/js/demo/table-manage-combine.demo.min.js"></script>
+
 	<!-- <script src="../assets/plugins/gritter/js/jquery.gritter.js"></script> -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="../assets/plugins/flot/jquery.flot.min.js"></script>
@@ -869,12 +1397,18 @@
 	<script src="../assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="../assets/js/demo/dashboard.min.js"></script>
+
+
+	
 	<!-- ================== END PAGE LEVEL JS ================== -->
+
+
 	
 	<script>
 		$(document).ready(function() {
 			App.init();
 			Dashboard.init();
+			TableManageCombine.init();
 		});
 	</script>
 
@@ -1010,7 +1544,12 @@
               //alert("cool");
               if (this.session_mins > 60)
               {
-              	alert("Max time is 60 minutes");
+              	alert("Max time allowed per session is 60 minutes");
+              	exit;
+              }
+              if (this.session_mins < 5)
+              {
+              	alert("Minimum session duration is 5 minutes");
               	exit;
               }
               if (this.timer_start_flag==true)
@@ -1030,6 +1569,15 @@
               
               this.session_secs=this.session_secs-1;
               this.session_secs_mins=(this.session_secs/60).toFixed(1);
+
+              
+          },
+          setView:function(val)
+          {
+              
+              this.view_flag=val;
+              //alert(this.view_flag);
+              //this.session_secs_mins=(this.session_secs/60).toFixed(1);
 
               
           },
@@ -1055,7 +1603,7 @@
 
 
 }.bind(this), function(response) {
-	alert("Something went wrong");
+	alert(response);
 });
         },
         	getSessions:function() {
@@ -1160,6 +1708,7 @@ colors: ['#00ACAC', '#348FE2', '#ec8f6e', '#f3b49f', '#f6c7b6'],
 vAxis: {
     textStyle:{color: '#ec8f6e'}
 },
+
              
                    		};
 
@@ -1189,7 +1738,8 @@ vAxis: {
             session_id:'',
             todays_date:'',
             date_sessions:'',
-            analytics_type:''
+            analytics_type:'',
+            view_flag:1
 
         }
 
