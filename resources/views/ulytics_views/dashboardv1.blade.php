@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>dndsessions | organize your life</title>
+	<title>ulytics | organize your life</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -52,7 +52,7 @@
 		<div id="header" class="header navbar-default">
 			<!-- begin navbar-header -->
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>dndsessions</b></a>
+				<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>ulytics</b></a>
 				<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -1732,7 +1732,7 @@ vAxis: {
             timer_id:'',
             refreshId:'',
             token:csrf_token,
-            access_url: 'http://54.193.10.239/',
+            access_url: 'https://www.ulytics.live/',
             session_start_time:'',
             session_end_time:'',
             session_id:'',
