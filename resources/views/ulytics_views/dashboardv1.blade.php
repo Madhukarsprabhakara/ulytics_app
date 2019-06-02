@@ -10,6 +10,7 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="email-address" content="{{ \Auth::user()->email }}">
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 	<link href="../assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -40,10 +41,11 @@
 	<!-- <script src="../assets/plugins/pace/pace.min.js"></script> -->
 	<!-- ================== END BASE JS ================== -->
 	<script type="text/javascript">
-    var email='msprabhakara@gmail.com';
+		var email_address = $('meta[name="email-address"]').attr('content');
+    //var email='msprabhakara@gmail.com';
     window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
       heap.load("2990430872");
-      heap.identify(email);
+      heap.identify(email_address);
 </script>
 </head>
 <body>
