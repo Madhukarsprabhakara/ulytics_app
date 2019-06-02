@@ -41,11 +41,11 @@
 	<!-- <script src="../assets/plugins/pace/pace.min.js"></script> -->
 	<!-- ================== END BASE JS ================== -->
 	<script type="text/javascript">
-		var email_address = $('meta[name="email-address"]').attr('content');
+		// var email_address = $('meta[name="email-address"]').attr('content');
     //var email='msprabhakara@gmail.com';
     window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
       heap.load("2990430872");
-      heap.identify(email_address);
+      // heap.identify(email_address);
 </script>
 </head>
 <body>
@@ -1433,6 +1433,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
     <script>
     var global_chart_data='';
+    var email_address = $('meta[name="email-address"]').attr('content');
+    heap.identify(email_address);
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
     //var url='http://127.0.0.1/';	
     var vm = new Vue({
