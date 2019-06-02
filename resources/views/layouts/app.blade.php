@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="email-address" content="{{ \Auth::id() }}">
+    <meta name="email-address" content="{{ \Auth::user()->email }}">
     <title>ulytics</title>
 
     <!-- Scripts -->
