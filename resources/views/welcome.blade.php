@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="email-address" content="{{ \Auth::user()->email }}">
+        <meta name="email-address" content="{{ \Auth::id() }}">
         <title>ulytics</title>
 
         <!-- Fonts -->
