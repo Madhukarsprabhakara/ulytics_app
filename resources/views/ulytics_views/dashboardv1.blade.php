@@ -1482,7 +1482,7 @@
               	}).then(function(response){
               		if(response.status == "200")
               		{
-
+              			document.title = "ulytics";
               			console.log(response.body);    
 
 
@@ -1542,6 +1542,7 @@
 				});
               	this.timer_start_flag=true; 
               	this.session_secs=this.session_mins*60;
+              	
               	this.refreshId=setInterval(function () {
               		this.setSession();
               		if (this.session_secs == 0)
@@ -1550,6 +1551,7 @@
               	clearInterval(this.refreshId);
               	//alert("Session Over");
               	this.sessionStop();
+              	document.title = "ulytics";
               	this.timer_start_flag=false;
               }
           }.bind(this), 1000);
@@ -1583,8 +1585,9 @@
           {
               
               this.session_secs=this.session_secs-1;
+              //document.title = this.session_secs;
               this.session_secs_mins=(this.session_secs/60).toFixed(1);
-
+              document.title = this.session_secs_mins+" mins";
               
           },
           setView:function(val)
