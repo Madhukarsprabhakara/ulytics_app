@@ -1587,7 +1587,8 @@
               this.session_secs=this.session_secs-1;
               //document.title = this.session_secs;
               this.session_secs_mins=(this.session_secs/60).toFixed(1);
-              document.title = this.session_secs_mins+" mins";
+
+              document.title = this.session_secs_mins+"|"+this.session_name;
               
           },
           setView:function(val)
