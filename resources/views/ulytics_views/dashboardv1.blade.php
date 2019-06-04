@@ -1549,7 +1549,7 @@
               		{
               	//send end time to server
               	clearInterval(this.refreshId);
-              	alert("Every sessions gets you closer to your goal!");
+              	alert("Every session gets you closer to your goal..never give up!");
               	this.sessionStop();
               	document.title = "ulytics";
               	this.timer_start_flag=false;
