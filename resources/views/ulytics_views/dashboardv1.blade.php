@@ -1549,7 +1549,7 @@
               		{
               	//send end time to server
               	clearInterval(this.refreshId);
-              	//alert("Session Over");
+              	alert("Every sessions gets you closer to your goal!");
               	this.sessionStop();
               	document.title = "ulytics";
               	this.timer_start_flag=false;
@@ -1652,7 +1652,7 @@
 
 
 }.bind(this), function(response) {
-	alert("Something went wrong");
+	//alert("Something went wrong");
 });
         },
 			LoadMainChart:function()
@@ -1682,7 +1682,7 @@
 
 
 }.bind(this), function(response) {
-  alert(response);
+  //alert(response);
 });
 
 
