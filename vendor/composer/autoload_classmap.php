@@ -43,6 +43,7 @@ return array(
     'App\\concepts' => $baseDir . '/app/concepts.php',
     'App\\dndsessions' => $baseDir . '/app/dndsessions.php',
     'App\\sentiment' => $baseDir . '/app/sentiment.php',
+    'App\\to_dolists' => $baseDir . '/app/to_dolists.php',
     'App\\url_categories' => $baseDir . '/app/url_categories.php',
     'App\\url_concepts' => $baseDir . '/app/url_concepts.php',
     'App\\url_id_mapping' => $baseDir . '/app/url_id_mapping.php',
