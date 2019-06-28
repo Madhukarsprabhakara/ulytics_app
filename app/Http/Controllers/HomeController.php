@@ -29,4 +29,8 @@ class HomeController extends Controller
     {
         return view('ulytics_views.dashboardv1');
     }
+    public function investments()
+    {
+        return "200";
+    }
 }
