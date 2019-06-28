@@ -29,8 +29,9 @@ class HomeController extends Controller
     {
         return view('ulytics_views.dashboardv1');
     }
-    public function investments()
+    public function investments(Request $request)
     {
-        return "200";
+        $data=$request->all;
+        return $data;
     }
 }
