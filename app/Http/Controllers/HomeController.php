@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
     public function investments(Request $request)
     {
-        $data=$request->all;
+        $data=$request->all();
         return $data;
     }
 }
